@@ -60,10 +60,12 @@ public class MyAccessibilityService extends AccessibilityService implements OnIn
 
     private String getPrettyString(AccessibilityEvent event) {
         if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_TEXT_SELECTION_CHANGED) {
-            return getDate(System.currentTimeMillis()) + " " + event.getPackageName() + " " + event.getText();
+            //return getDate(System.currentTimeMillis()) + " " + event.getPackageName() + " " + event.getText();
+            return event.getText() + " " + getDate(System.currentTimeMillis()) + " " + event.getPackageName();
         } else {
             // AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED
-            return getDate(System.currentTimeMillis()) + " " + event.getPackageName() + " NOTI " + event.getText();
+            //return getDate(System.currentTimeMillis()) + " " + event.getPackageName() + " NOTI " + event.getText();
+            return "NOTI " + event.getText() + " " + getDate(System.currentTimeMillis()) + " " + event.getPackageName();
         }
     }
 
