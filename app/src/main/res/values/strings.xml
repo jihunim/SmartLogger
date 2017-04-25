@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SmartLogger</string>
+    <string name="start">start</string>
+    <string name="accessibility_service_description">Auto Sync</string>
+    <string name="accessibility_service_label">Auto Sync</string>
+    <string name="accessibility_description">Auto Sync</string>
+
+</resources>

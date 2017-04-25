@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="V:\Android\.AndroidStudio2.2\.android\build-cache\c419a82afcb24bc7fc0a0b07eb6a6c8206548929\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="eb0d830e3eabb9deb9ec44869cf7ac7ea1ad794c">
+        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_13af7cc62f0d1655019fc1acc16283c743c71386\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="V:\Android\.AndroidStudio2.2\.android\build-cache\4eb1d5545ff45c9f563ebb844476d0d67142fa98\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="6116e0e7069de7fc259aac8e08b84f32c2038231">
+        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9e8546facd76664e6927812baae2ff1ef73ba9ea\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="V:\Android\SmartLogger\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_484ccff3c5d9461e950a9069342fc625105590c6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="V:\Android\.AndroidStudio2.2\.android\build-cache\0a1c1f1eeb2b34f8009c3008a11b0b1f8adfbc69\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="8010ae6ed32828a145b25ec97bc07b7a83c6318f">
+        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_fd85a3f4508db098226cec2b792e8367f080afc8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="V:\Android\.AndroidStudio2.2\.android\build-cache\bd4f5c94509f0731b2ba4b8c0f21abe8f776ef2d\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="6addaba208e21c6da776d0ca75b6b23a6ccd5499">
+        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_3084419fbca27dfe337f1b47e81d72f5f31e41fd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="V:\Android\SmartLogger\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="c3fddcf1406be5acdda80732f4732a7dd4477fd8">
+        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_ec22929b70aa7eb5a6d950278ab0902dd1a6aa61\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="V:\Android\.AndroidStudio2.2\.android\build-cache\783fc3efa103850a900337a61541e3557909b924\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="486371f97baad8e607f332f20fee1d3dd00a731a">
+        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d5bb20d87c65a02035fa79d01d262c4b60dcd71e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="V:\Android\.AndroidStudio2.2\.android\build-cache\458166db8dffaf6cbf1f4e0f942dde5ef8b63155\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="756f6297eef79784f5e356dcd4f39865028b2bd0">
+        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e1b1ff132d687352599be0355c78a8edc9c90642\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="V:\Android\.AndroidStudio2.2\.android\build-cache\8a52d851d2434dc73d6c2f4783022e6775ec7101\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="433f4d6aa5f21f19552afe0e6c5eff0fedba73ad">
+        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ada8a4d412c188e9a2d64d3cc203a6082ede1e21\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="V:\Android\.AndroidStudio2.2\.android\build-cache\88c9e057b0a1f24bc17a128bbf1775e7e73e8600\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="8f128aeeb7e31271b28a7adb9dac1f3a6ed9f5e7">
+        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_02a9f0083ab7296f69b89d9d57dc8c0a69f37c39\classes.dex" />
+    </item>
+
+</items>
