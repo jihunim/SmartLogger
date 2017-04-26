@@ -6,8 +6,11 @@ package smartmonitor.google.com.smartlogger.Data;
 
 public class AccessibilityData {
     private String contents;
-    public AccessibilityData(String contents) {
-        this.contents = contents;
+    private String date;
+    private String apkName;
+
+
+    public AccessibilityData() {
     }
 
     public String getContents() {
@@ -16,5 +19,21 @@ public class AccessibilityData {
 
     public void setContents(String contents) {
         this.contents = contents;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getApkName() {
+        return apkName;
+    }
+
+    public void setApkName(String apkName) {
+        this.apkName = apkName;
     }
 }
