@@ -3,6 +3,15 @@
 
     <item
         is-multidex="true"
+        jar="V:\Android\SmartLogger\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="2e6512a4284f5448a62150926501a4611ec1d7ae">
+        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_ec22929b70aa7eb5a6d950278ab0902dd1a6aa61\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="V:\Android\SmartLogger\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
@@ -12,12 +21,21 @@
     </item>
     <item
         is-multidex="true"
-        jar="V:\Android\SmartLogger\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jar="V:\Android\.AndroidStudio2.2\.android\build-cache\9acdfd7788fde5f3cc3afbc6286ceebc8edee907\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="0c844c24c4d36995be2ed95138fc6dc20df4c900">
-        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_ec22929b70aa7eb5a6d950278ab0902dd1a6aa61\classes.dex" />
+        sha1="25438f55fc6d906a0e72f30b21487541430ede43">
+        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f7318b62fbdff4d4b75c23fc56195a6ea20f835d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="V:\Android\.AndroidStudio2.2\.android\build-cache\8704530ae95b3ff671ac7ab3cdde8a4404f21e9d\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="ffc15e965a9e8c28f24455eedd4cac215c45d1fc">
+        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_30b8b9cdfb14efca6e748f59a0e4d01cae0f5f06\classes.dex" />
     </item>
 
 </items>

