@@ -23,6 +23,8 @@ public class MainActivity extends Activity {
         //setContentView(R.layout.activity_main);
         startActivity(sSettingsIntent);
         finish();
+
+        //TODO File로 저장하게하기, 카카오톡삭제버튼도 기록하기, 삭제버튼 전후내용 인식되게만들기,
     }
 
 }

@@ -18,7 +18,8 @@ public class FileWriter implements DataWritingInterface {
 
     @Override
     public void write(AccessibilityData data) {
-        //Log.d(TAG, data.getContents());
+        Log.d(TAG, "writed: " + data.getContents());
+
     }
 
     public static DataWritingInterface getInstance() {
