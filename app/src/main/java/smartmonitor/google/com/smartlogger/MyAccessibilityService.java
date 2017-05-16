@@ -41,12 +41,13 @@ public class MyAccessibilityService extends AccessibilityService implements OnIn
     AccessibilityServiceInfo info;
     DataWritingInterface writer;
     private final String TAG = "AccessTest";
-    private String dataFormatYMDhms = "MM/dd hh:mm";
+    private String dataFormatYMDhms = "MM/dd HH:mm";
     private DateFormat dateFormat;
     AccessibilityData data;
     private String message;
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
     private boolean monitorEnabled = true;
+    private String currentText;
 
 
     /**
@@ -55,14 +56,17 @@ public class MyAccessibilityService extends AccessibilityService implements OnIn
      */
     public void onAccessibilityEvent(AccessibilityEvent event) {
         try {
+            currentText = event.getText().toString();
             if (monitorEnabled) {
                 if (event.getEventType() == AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) {
-                    data.setContents(event.getText().toString());
-                    data.setApkName(event.getPackageName().toString());
-                    data.setDate(getDate(System.currentTimeMillis()));
-                    writer.write(data);
+                    if (!currentText.equals("[]")) {
+                        data.setContents(currentText);
+                        data.setApkName(event.getPackageName().toString());
+                        data.setDate(getDate(System.currentTimeMillis()));
+                        writer.write(data);
+                    }
                 } else if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_TEXT_SELECTION_CHANGED) {
-                    if (event.getText().toString().equals("[]") || event.getText().toString().equals("[메시지 쓰기...]")) {
+                    if (event.getText().toString().equals("[]") || event.getText().toString().equals("[메시지 쓰기...]") || event.getText().toString().equals("[비밀 메시지]")) {
                         if (message != null || !message.equals("[]")) {
                             data.setContents(message);
                             data.setApkName(event.getPackageName().toString());
@@ -72,12 +76,12 @@ public class MyAccessibilityService extends AccessibilityService implements OnIn
                         }
                     }
                 } else if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED) {
-                    message = event.getText().toString();
+                    message = currentText;
                 }
 //                } else if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
 //                    Log.e(TAG, "Catch Event Type: " + AccessibilityEvent.eventTypeToString(event.getEventType()));
 //                    Log.e(TAG, "Catch Event Package Name : " + event.getPackageName());
-//                    Log.e(TAG, "Catch Event TEXT : " + event.getText());
+                    Log.e(TAG, "Catch Event TEXT : " + event.getText());
 //                    Log.e(TAG, "Catch Event ContentDescription  : " + event.getContentDescription());
 //                    Log.e(TAG, "Catch Event getSource : " + event.getSource());
 //                    Log.e(TAG, "=========================================================================");
