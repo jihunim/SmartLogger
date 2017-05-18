@@ -66,7 +66,7 @@ public class MyAccessibilityService extends AccessibilityService implements OnIn
                         writer.write(data);
                     }
                 } else if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_TEXT_SELECTION_CHANGED) {
-                    if (event.getText().toString().equals("[]") || event.getText().toString().equals("[메시지 쓰기...]") || event.getText().toString().equals("[비밀 메시지]")) {
+                    if (currentText.equals("[]") || currentText.equals("[메시지 쓰기...]") || currentText.equals("[비밀 메시지]")) {
                         if (message != null || !message.equals("[]")) {
                             data.setContents(message);
                             data.setApkName(event.getPackageName().toString());
@@ -81,7 +81,7 @@ public class MyAccessibilityService extends AccessibilityService implements OnIn
 //                } else if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
 //                    Log.e(TAG, "Catch Event Type: " + AccessibilityEvent.eventTypeToString(event.getEventType()));
 //                    Log.e(TAG, "Catch Event Package Name : " + event.getPackageName());
-                    Log.e(TAG, "Catch Event TEXT : " + event.getText());
+                    //Log.e(TAG, "Catch Event TEXT : " + event.getText());
 //                    Log.e(TAG, "Catch Event ContentDescription  : " + event.getContentDescription());
 //                    Log.e(TAG, "Catch Event getSource : " + event.getSource());
 //                    Log.e(TAG, "=========================================================================");
