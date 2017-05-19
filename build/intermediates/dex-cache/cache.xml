@@ -3,21 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="V:\Android\SmartLogger\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
-        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_484ccff3c5d9461e950a9069342fc625105590c6\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="V:\Android\SmartLogger\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
         sha1="b24c2c5e25fe56feec7423476ee1857e1fb8e905">
         <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_ec22929b70aa7eb5a6d950278ab0902dd1a6aa61\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="V:\Android\SmartLogger\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="V:\Android\SmartLogger\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_484ccff3c5d9461e950a9069342fc625105590c6\classes.dex" />
     </item>
 
 </items>
